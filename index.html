@@ -11,20 +11,112 @@
             padding: 0;
             height: 100%;
             overflow: hidden; /* Menghilangkan scrollbar di halaman utama */
+            background-color: #ffffff;
+            /* Menggunakan flexbox vertikal agar iframe dan footer tersusun rapi */
+            display: flex;
+            flex-direction: column;
         }
+
+        /* Style untuk Layar Loading */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        /* Style untuk Logo Loading */
+        .loading-logo {
+            width: 120px;
+            height: auto;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.7; }
+        }
+
+        /* Iframe otomatis mengambil sisa ruang di atas footer */
         iframe {
             display: block;
             width: 100%;
-            height: 100vh;
+            flex-grow: 1; 
             border: none;
+        }
+
+        /* Style untuk Footer */
+        footer {
+            background-color: #f8f9fa; /* Warna latar belakang footer abu-abu terang */
+            color: #6c757d; /* Warna teks */
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between; /* Membagi teks ke kiri dan kanan */
+            align-items: center;
+            border-top: 1px solid #e9ecef;
+            box-sizing: border-box;
+        }
+
+        /* Style untuk link instagram di footer */
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
+    <!-- Layar Loading -->
+    <div id="loading-screen">
+        <img src="logo-va.png" alt="Loading..." class="loading-logo">
+    </div>
+
+    <!-- Konten Utama (Iframe) -->
     <iframe src="https://script.google.com/macros/s/AKfycby2NjyS_cIl1gAfk4wksgIeefJtHYknLBxKAbWYkmCV1hQSEX8axhHyEFZJlIlypOu1Yw/exec" 
-            title="Aplikasi Saya">
+            title="Aplikasi Saya"
+            onload="hilangkanLoading()">
     </iframe>
+
+    <!-- Bagian Footer -->
+    <footer>
+        <div>
+            &copy; <span id="tahun-copyright"></span> Personal Manager. All Rights Reserved.
+        </div>
+        <div>
+            Designed By : <a href="https://www.instagram.com/vin.ard/" target="_blank" rel="noopener noreferrer">Bonaventura Alvin Ardian</a>
+        </div>
+    </footer>
+
+    <script>
+        // Fungsi untuk menghilangkan layar loading
+        function hilangkanLoading() {
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.visibility = 'hidden';
+            
+            setTimeout(() => {
+                loadingScreen.remove();
+            }, 500);
+        }
+
+        // Script untuk mendapatkan tahun secara otomatis
+        document.getElementById('tahun-copyright').textContent = new Date().getFullYear();
+    </script>
 
 </body>
 </html>
