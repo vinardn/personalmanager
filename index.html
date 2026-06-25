@@ -12,7 +12,6 @@
             height: 100%;
             overflow: hidden; /* Menghilangkan scrollbar di halaman utama */
             background-color: #ffffff;
-            /* Menggunakan flexbox vertikal agar iframe dan footer tersusun rapi */
             display: flex;
             flex-direction: column;
         }
@@ -53,21 +52,21 @@
             border: none;
         }
 
-        /* Style untuk Footer */
+        /* Style untuk Footer (Tampilan Desktop/Tab) */
         footer {
-            background-color: #f8f9fa; /* Warna latar belakang footer abu-abu terang */
-            color: #6c757d; /* Warna teks */
+            background-color: #f8f9fa;
+            color: #6c757d;
             font-family: Arial, sans-serif;
             font-size: 12px;
-            padding: 8px 15px;
+            padding: 10px 15px;
             display: flex;
-            justify-content: space-between; /* Membagi teks ke kiri dan kanan */
+            justify-content: space-between;
             align-items: center;
             border-top: 1px solid #e9ecef;
             box-sizing: border-box;
+            gap: 10px; /* Memberikan jarak aman antar teks */
         }
 
-        /* Style untuk link instagram di footer */
         footer a {
             color: #007bff;
             text-decoration: none;
@@ -76,6 +75,16 @@
 
         footer a:hover {
             text-decoration: underline;
+        }
+
+        /* RESPONSIVE: Khusus Layar HP (Lebar di bawah 600px) */
+        @media (max-width: 600px) {
+            footer {
+                flex-direction: column; /* Mengubah susunan jadi atas-bawah */
+                text-align: center;    /* Teks otomatis rata tengah */
+                gap: 6px;              /* Jarak antara baris atas dan bawah */
+                padding: 12px 15px;    /* Sedikit mempertebal padding di HP */
+            }
         }
     </style>
 </head>
